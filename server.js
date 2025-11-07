@@ -1,0 +1,46 @@
+import express from "express";
+import dotenv from "dotenv";
+import { callCatchService } from "./soapClient.js";
+import { APP_MESSAGES, ERROR_MESSAGES } from "./constants.js";
+
+dotenv.config();
+const app = express();
+app.use(express.json());
+
+app.get("/catch/status", (req, res) => {
+  res.json({
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    message: APP_MESSAGES.SERVER_STARTED
+  });
+});
+
+app.post("/catch/sync", async (req, res) => {
+  try {
+    const { exchangedDocument, SOAPAction } = req.body;
+    SOAPAction = SOAPAction ?? "CreateCatchCertificateRequest"
+
+    if (!exchangedDocument) {
+      return res.status(400).json({
+        status: "ERROR",
+        errorCode: "BAD_REQUEST",
+        message: ERROR_MESSAGES.BAD_REQUEST
+      });
+    }
+
+    const response = await callCatchService({ exchangedDocument, SOAPAction });
+    res.json(response);
+  } catch (err) {
+    console.error(ERROR_MESSAGES.GENERAL_ERROR, err);
+    res.status(500).json({
+      status: "ERROR",
+      errorCode: "INTERNAL_ERROR",
+      message: ERROR_MESSAGES.INTERNAL_ERROR
+    });
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`${APP_MESSAGES.SERVER_LISTENING} : ${PORT}`);
+});
