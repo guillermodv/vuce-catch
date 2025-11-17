@@ -7,6 +7,8 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+const OK_CODE = 200;
+
 app.get("/catch/status", (req, res) => {
   res.json({
     status: "OK",
@@ -15,13 +17,13 @@ app.get("/catch/status", (req, res) => {
   });
 });
 
-app.post("/catch/sync", async (req, res) => {
+app.post("/catch/create", async (req, res) => {
   try {
-    const { exchangedDocument, SOAPAction } = req.body;
-    SOAPAction = SOAPAction ?? "CreateCatchCertificateRequest"
+    const { exchangedDocument } = req.body;
+    const SOAPAction = "CreateCatchCertificateRequest"
 
     if (!exchangedDocument) {
-      return res.status(400).json({
+      return res.status(OK_CODE).json({
         status: "ERROR",
         errorCode: "BAD_REQUEST",
         message: ERROR_MESSAGES.BAD_REQUEST
@@ -32,7 +34,32 @@ app.post("/catch/sync", async (req, res) => {
     res.json(response);
   } catch (err) {
     console.error(ERROR_MESSAGES.GENERAL_ERROR, err);
-    res.status(500).json({
+    res.status(OK_CODE).json({
+      status: "ERROR",
+      errorCode: "INTERNAL_ERROR",
+      message: ERROR_MESSAGES.INTERNAL_ERROR
+    });
+  }
+});
+
+app.post("/catch/processing", async (req, res) => {
+  try {
+    const { exchangedDocument } = req.body;
+    const SOAPAction = "createCatchProcessingStatement"
+
+    if (!exchangedDocument) {
+      return res.status(OK_CODE).json({
+        status: "ERROR",
+        errorCode: "BAD_REQUEST",
+        message: ERROR_MESSAGES.BAD_REQUEST
+      });
+    }
+
+    const response = await callCatchService({ exchangedDocument, SOAPAction });
+    res.json(response);
+  } catch (err) {
+    console.error(ERROR_MESSAGES.GENERAL_ERROR, err);
+    res.status(OK_CODE).json({
       status: "ERROR",
       errorCode: "INTERNAL_ERROR",
       message: ERROR_MESSAGES.INTERNAL_ERROR

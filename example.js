@@ -55,7 +55,7 @@ const data = {
   exchangedDocument
 };
 
-axios.post('http://localhost:3000/catch/sync', data)
+axios.post('http://localhost:3000/catch/create', data)
     .then(response => {
         console.log('Response:', response.data);
     })

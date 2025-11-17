@@ -6,7 +6,6 @@ dotenv.config();
 
 export async function callCatchService(data) {
   const { SOAP_URL, SOAP_USER, SOAP_PASS } = process.env;
-
   const { exchangedDocument, SOAPAction } = data;
 
   const soapBody = `<?xml version="1.0" encoding="UTF-8"?>
@@ -41,10 +40,11 @@ export async function callCatchService(data) {
   </soapenv:Envelope>`;
 
   try {
+    if (!SOAPAction) throw new Error("No SOAPaction"); 
     const { data: responseXML } = await axios.post(SOAP_URL, soapBody, {
       headers: {
         "Content-Type": "text/xml;charset=UTF-8",
-        SOAPAction: SOAPAction || "CreateCatchCertificateRequest",
+        SOAPAction: SOAPAction,
       },
       timeout: 20000,
     });

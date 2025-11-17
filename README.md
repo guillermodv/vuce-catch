@@ -26,7 +26,7 @@ SOAP_PASS=claveSecreta
 ```
 
 
-curl -X POST http://localhost:3000/catch/sync \
+curl -X POST http://localhost:3000/catch/create \
 -H "Content-Type: application/json" \
 -d '{"exchangedDocument": "AR-20251030-1000002"}'
 
