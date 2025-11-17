@@ -12,7 +12,8 @@ npm start
 ## 📡 Endpoints principales
 
 - `GET /catch/status` → Devuelve el estado del servicio.
-- `POST /catch/sync` → Recibe datos JSON, llama al servicio SOAP CATCH y devuelve la respuesta estandarizada.
+- `POST /catch/create` → Recibe datos JSON, llama al servicio SOAP CATCH y devuelve la respuesta estandarizada.
+- `POST /catch/processing` → Recibe datos JSON, llama al servicio SOAP CATCH y devuelve la respuesta estandarizada.
 
 ## ⚙️ Configuración
 Configurar las variables del archivo `.env`:
@@ -25,13 +26,11 @@ SOAP_USER=usuario123
 SOAP_PASS=claveSecreta
 ```
 
-
 curl -X POST http://localhost:3000/catch/create \
 -H "Content-Type: application/json" \
 -d '{"exchangedDocument": "AR-20251030-1000002"}'
 
 curl -X GET http://localhost:3000/catch/status 
-
 
 ---
 Autor: GDV
