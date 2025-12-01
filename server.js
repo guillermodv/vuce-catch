@@ -1,7 +1,7 @@
-import express from "express";
 import dotenv from "dotenv";
-import { callCatchService } from "./soapClient.js";
+import express from "express";
 import { APP_MESSAGES, ERROR_MESSAGES } from "./constants.js";
+import { callCatchService } from "./soapClient.js";
 
 dotenv.config();
 const app = express();
@@ -19,7 +19,10 @@ app.get("/catch/status", (req, res) => {
 
 app.post("/catch/create", async (req, res) => {
   try {
-    const { exchangedDocument } = req.body;
+    const { exchangedDataDocument } = req.body;
+    const exchangedDocument = utils.decodeBase64(utils.xmlExtractData(exchangedDataDocument));
+    console.log(exchangedDocument);
+    
     const SOAPAction = "CreateCatchCertificateRequest"
 
     if (!exchangedDocument) {
@@ -44,7 +47,10 @@ app.post("/catch/create", async (req, res) => {
 
 app.post("/catch/processing", async (req, res) => {
   try {
-    const { exchangedDocument } = req.body;
+    const { exchangedDataDocument } = req.body;
+    const exchangedDocument = utils.decodeBase64(utils.xmlExtractData(exchangedDataDocument));
+    console.log(exchangedDocument);
+
     const SOAPAction = "createCatchProcessingStatement"
 
     if (!exchangedDocument) {

@@ -15,3 +15,8 @@ export const APP_MESSAGES = {
   SERVER_STARTED: "REST server started successfully.",
   GENERAL_ERROR: "Unexpected error in the REST server.",
 };
+
+export const DECODE_MESSAGES = {
+  BASE64_DECODE_ERROR: "Error decoding Base64 data:", 
+  NOT_FOUND: "The specified field was not found in the JSON data.",
+}; 
