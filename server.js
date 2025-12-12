@@ -20,19 +20,20 @@ app.get("/catch/status", (req, res) => {
 
 app.post("/catch/create", async (req, res) => {
   try {
-    const { exchangedDataDocument } = req.body;
-    const exchangedDocument = utils.decodeBase64(utils.xmlExtractData(exchangedDataDocument));
-    console.log(exchangedDocument);
-    
-    const SOAPAction = "CreateCatchCertificateRequest"
+      const { xmlLPCO } = req.body;
+      console.log('exchangedDataDocument', xmlLPCO)
+      const exchangedDocument = utils.decodeBase64(utils.xmlExtractData(xmlLPCO));
+      console.log(exchangedDocument);
+      
+      const SOAPAction = "CreateCatchCertificateRequest"
 
-    if (!exchangedDocument) {
-      return res.status(OK_CODE).json({
-        status: "ERROR",
-        errorCode: "BAD_REQUEST",
-        message: ERROR_MESSAGES.BAD_REQUEST
-      });
-    }
+      if (!exchangedDocument) {
+        return res.status(OK_CODE).json({
+          status: "ERROR",
+          errorCode: "BAD_REQUEST",
+          message: ERROR_MESSAGES.BAD_REQUEST
+        });
+      }
 
     const response = await callCatchService({ exchangedDocument, SOAPAction });
     res.json(response);
@@ -48,8 +49,8 @@ app.post("/catch/create", async (req, res) => {
 
 app.post("/catch/processing", async (req, res) => {
   try {
-    const { exchangedDataDocument } = req.body;
-    const exchangedDocument = utils.decodeBase64(utils.xmlExtractData(exchangedDataDocument));
+    const { xmlLPCO } = req.body;
+    const exchangedDocument = utils.decodeBase64(utils.xmlExtractData(xmlLPCO));
     console.log(exchangedDocument);
 
     const SOAPAction = "createCatchProcessingStatement"

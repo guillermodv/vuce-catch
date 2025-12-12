@@ -1,11 +1,14 @@
 import { DECODE_MESSAGES } from './constants.js';
 
 export function xmlExtractData(data) {
-    if (!data || data.xmlPCO) {
+    if (!data) {
         throw new Error(DECODE_MESSAGES.NOT_FOUND);
     }
-    return data.xmlPCO;
-}   
+    if (data.xmlPCO) {
+        return data.xmlPCO;
+    }
+    return data;
+}
 
 export function decodeBase64(data64) {
     try {
