@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import { APP_MESSAGES, ERROR_MESSAGES } from "./constants.js";
 import { callCatchService } from "./soapClient.js";
+import * as utils from "./utils.js";
 
 dotenv.config();
 const app = express();

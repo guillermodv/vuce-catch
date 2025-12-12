@@ -21,14 +21,13 @@ Configurar las variables del archivo `.env`:
 ```
 PORT=3000
 SOAP_URL=https://api.catch.com/soap/service
-SOAP_METHOD=getCatchData
 SOAP_USER=usuario123
 SOAP_PASS=claveSecreta
 ```
 
 curl -X POST http://localhost:3000/catch/create \
 -H "Content-Type: application/json" \
--d '{"exchangedDocument": "AR-20251030-1000002"}'
+-d '{"exchangedDataDocument": "XML BASE 64"}'
 
 curl -X GET http://localhost:3000/catch/status 
 
