@@ -1,5 +1,5 @@
 export const ERROR_MESSAGES = {
-  BAD_REQUEST: "The 'exchangedDocument' field is required.",
+  BAD_REQUEST: "The 'xmlLPCO' field is required.",
   INTERNAL_ERROR: "Unexpected error in the REST server.",
   SOAP_ERROR: "SOAP Error:",
 };
