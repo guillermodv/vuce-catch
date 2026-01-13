@@ -19,11 +19,10 @@ export async function callCatchService(data) {
                     xmlns:urn2="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">
     <soapenv:Header>
     <v4:LanguageCode>en</v4:LanguageCode>
-    <v4:LanguageCode>${process.env.SOAP_LANGUAGE}</v4:LanguageCode>
     <v3:BodyIdentity>
       <AuthorityActivityAccessIdentifier>${process.env.SOAP_AUTHORITY_ID}</AuthorityActivityAccessIdentifier>
     </v3:BodyIdentity>
-    <v4:WebServiceClientId>${SOAP_USER}</v4:WebServiceClientId>
+    <v4:WebServiceClientId>catch-universal</v4:WebServiceClientId>
     <oas:Security>
       <oas:UsernameToken>
         <oas:Username>${SOAP_USER}</oas:Username>
@@ -39,25 +38,6 @@ export async function callCatchService(data) {
       </v1:CreateCatchCertificateRequest>
     </soapenv:Body>
   </soapenv:Envelope>`;
-
-----
-
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
- xmlns:v4="http://ec.europa.eu/sanco/tracesnt/base/v4"
-  xmlns:v3="http://ec.europa.eu/tracesnt/body/v3"
-   xmlns:oas="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-    xmlns:v1="http://ec.europa.eu/tracesnt/certificate/catch/submission/v1" 
-    xmlns:urn="urn:un:unece:uncefact:data:standard:SPSCertificate:17"
-     xmlns:urn1="urn:un:unece:uncefact:data:standard:ReusableAggregateBusinessInformationEntity:21" 
-     xmlns:urn2="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:21">
-   <soapenv:Header>
-      <v4:LanguageCode>en</v4:LanguageCode>
-      <v3:BodyIdentity>
-         <AuthorityActivityAccessIdentifier>AR0001qIzUmF</AuthorityActivityAccessIdentifier>
-      </v3:BodyIdentity>
-      <v4:WebServiceClientId>catch-universal</v4:WebServiceClientId>
-      <oas:Security/>
-   </soapenv:Header>
 
   try {
     if (!SOAPAction) throw new Error("No SOAPaction"); 
