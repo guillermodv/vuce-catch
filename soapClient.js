@@ -56,7 +56,7 @@ export async function callCatchService(data) {
     };
   } catch (error) {
     console.log('error', error.message);
-    1//console.error(ERROR_MESSAGES.SOAP_ERROR, error.message);
+    //console.error(ERROR_MESSAGES.SOAP_ERROR, error.message);
     return {
       status: "ERROR",
       message: ERROR_MESSAGES.SOAP_ERROR + " " + error.message,
