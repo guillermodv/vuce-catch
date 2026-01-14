@@ -5,7 +5,7 @@ import { ERROR_MESSAGES } from "./constants.js";
 dotenv.config();
 
 export async function callCatchService(data) {
-  const { SOAP_URL, SOAP_USER, SOAP_PASS } = process.env;
+  const { SOAP_URL, SOAP_USER, SOAP_PASS, SOAP_AUTHORITY_ID } = process.env;
   const { exchangedDocument, SOAPAction } = data;
 
   const soapBody = `<?xml version="1.0" encoding="UTF-8"?>
@@ -20,7 +20,7 @@ export async function callCatchService(data) {
     <soapenv:Header>
     <v4:LanguageCode>en</v4:LanguageCode>
     <v3:BodyIdentity>
-      <AuthorityActivityAccessIdentifier>${process.env.SOAP_AUTHORITY_ID}</AuthorityActivityAccessIdentifier>
+      <AuthorityActivityAccessIdentifier>${SOAP_AUTHORITY_ID}</AuthorityActivityAccessIdentifier>
     </v3:BodyIdentity>
     <v4:WebServiceClientId>catch-universal</v4:WebServiceClientId>
     <oas:Security>
@@ -41,8 +41,8 @@ export async function callCatchService(data) {
 
   try {
     if (!SOAPAction) throw new Error("No SOAPaction"); 
-    const formattedXML = soapBody.replace(/>\s+</g, "><").replace(/\n/g, "");
-    console.log(`Sending to: ${SOAP_URL} data: ${formattedXML}`);
+    //const formattedXML = soapBody.replace(/>\s+</g, "><").replace(/\n/g, "");
+    //console.log(`Sending to: ${SOAP_URL} data: ${formattedXML}`);
     const { data: responseXML } = await axios.post(SOAP_URL, soapBody, {
       headers: {
         "Content-Type": "text/xml;charset=UTF-8",

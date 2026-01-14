@@ -21,10 +21,17 @@ app.get("/catch/status", (req, res) => {
 app.post("/catch/create", async (req, res) => {
   try {
       const { xmlLPCO } = req.body;
-      console.log('exchangedDataDocument', xmlLPCO)
+      console.log('req.body', req.body);
+      if (!xmlLPCO) {
+        return res.status(OK_CODE).json({
+          status: "ERROR",
+          errorCode: "BAD_REQUEST",
+          message: "The 'xmlLPCO' field is required."
+        });
+      }
+      //console.log('xmlLPCO', xmlLPCO)
       const exchangedDocument = utils.decodeBase64(utils.xmlExtractData(xmlLPCO));
-      console.log(exchangedDocument);
-      
+      //console.log(exchangedDocument);
       const SOAPAction = "CreateCatchCertificateRequest"
 
       if (!exchangedDocument) {
