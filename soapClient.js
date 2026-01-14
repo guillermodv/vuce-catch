@@ -41,8 +41,6 @@ export async function callCatchService(data) {
 
   try {
     if (!SOAPAction) throw new Error("No SOAPaction"); 
-    //const formattedXML = soapBody.replace(/>\s+</g, "><").replace(/\n/g, "");
-    //console.log(`Sending to: ${SOAP_URL} data: ${formattedXML}`);
     const { data: responseXML } = await axios.post(SOAP_URL, soapBody, {
       headers: {
         "Content-Type": "text/xml;charset=UTF-8",
@@ -57,7 +55,8 @@ export async function callCatchService(data) {
       rawResponse: responseXML,
     };
   } catch (error) {
-    console.error(ERROR_MESSAGES.SOAP_ERROR, error.message);
+    console.log('error', error.message);
+    1//console.error(ERROR_MESSAGES.SOAP_ERROR, error.message);
     return {
       status: "ERROR",
       message: ERROR_MESSAGES.SOAP_ERROR + " " + error.message,

@@ -21,7 +21,7 @@ app.get("/catch/status", (req, res) => {
 app.post("/catch/create", async (req, res) => {
   try {
       const { xmlLPCO } = req.body;
-      console.log('req.body', req.body);
+      //console.log('req.body', req.body);
       if (!xmlLPCO) {
         return res.status(OK_CODE).json({
           status: "ERROR",
