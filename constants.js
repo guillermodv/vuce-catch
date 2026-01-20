@@ -2,6 +2,7 @@ export const ERROR_MESSAGES = {
   BAD_REQUEST: "The 'xmlLPCO' field is required.",
   INTERNAL_ERROR: "Unexpected error in the REST server.",
   SOAP_ERROR: "SOAP Error:",
+  SOAP_UI_ERROR: "SOAP UI Error:"
 };
 
 export const SUCCESS_MESSAGES = {

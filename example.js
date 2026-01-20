@@ -7,16 +7,16 @@ const datos = {
   codigoARTF: "ARTF0004",
   codigoAreaEmisora: "AE0005",
   codigoTipoLPCO: "LPCOVUCE0030",
-  Fecha: "2026-01-13",
+  Fecha: "2024-01-13",
   CUIT: "30717104079",
   codigoLPCO: "745158889",
-  fechaEmision: "2026-01-13",
+  fechaEmision: "2024-01-13",
   acronym: "AVIF",
   xmlLPCO: "",
   error: ""
 };
 
-const xml = `<><urn:spsexchangeddocument>
+const xml = `<urn:spsexchangeddocument>
                <urn1:name languageid="en">Catch Certificate</urn1:name>
                <urn1:id schemeagencyid="agency">
                <urn1:typecode name="CATCH_CERTIFICATE">852</urn1:typecode>            
@@ -40,7 +40,7 @@ const xml = `<><urn:spsexchangeddocument>
                <urn1:referencespsreferenceddocument>               
                   <urn1:typecode>916</urn1:typecode>
                   <urn1:relationshiptypecode>DM</urn1:relationshiptypecode>
-                  <urn1:id>AR-20260113-1000003</urn1:id>
+                  <urn1:id>AR-20260113-1000052</urn1:id>
                </urn1:referencespsreferenceddocument>
                <urn1:referencespsreferenceddocument>
                   <urn1:typecode>916</urn1:typecode>
@@ -247,7 +247,7 @@ const xml = `<><urn:spsexchangeddocument>
                
                   </urn1:includedspstradelineitem>
                </urn1:includedspsconsignmentitem>
-            </urn:spsconsignment></>`;
+            </urn:spsconsignment>`;
 
 // Base64 correcto en JS
 const b64_xml = Buffer
